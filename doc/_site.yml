@@ -1,11 +1,11 @@
-name: "Dernild.dk"
+name: "Dernild.com"
 title: "Alexander Dernild"
 description: |
   Personal website/blog by Alexander Dernild showcasing Data Science projects.
 output_dir: "_site"
 theme: theme.css
-base_url: https://dernild.dk
-repository_url: https://github.com/adernild/website
+base_url: https://dernild.com
+repository_url: https://github.com/ADernild/distill_blog_dernild.com
 google_analytics: "G-CFSZYDMJDG"
 favicon: images/circle-cropped-profile-pic.png
 collections:

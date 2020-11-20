@@ -1,6 +1,0 @@
----
-title: "Projects"
-site: distill::distill_website
----
-
-* [**Comparative sentiment analysis - Presidential debates and live Twitter engagement**](pres_debate.html)

@@ -4,7 +4,7 @@ description: |
   In this post I intend to describe and showcase the more technical aspects, of the data collection and cleaning process of Twitter data for a Natural Language Processing project focused on the Presidential debates 2020. For this project I collected, a total amount of 325.314 unique tweets, during and immediately after the first and second presidential debate 2020. To do this I used R software, R Studio, Twitter Rest API, and R markdown and Distill for this site.
 author:
   - name: Alexander Dernild
-    url: https://dernild.dk
+    url: https://dernild.com
     #orcid_id: 0000-0002-6055-8271
 date: 11-19-2020
 bibliography: 
