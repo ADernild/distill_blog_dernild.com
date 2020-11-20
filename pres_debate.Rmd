@@ -1,0 +1,12 @@
+---
+title: "Comparative sentiment analysis - Presidential debates and live Twitter engagement"
+site: distill::distill_website
+listing: 
+  posts:
+    - 2020-11-19-presdebate-data-collection-and-cleaning
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+

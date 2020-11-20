@@ -1,0 +1,94 @@
+---
+title: "Data Collection and Cleaning"
+description: |
+  In this post I intend to describe and showcase the more technical aspects, of the data collection and cleaning process of Twitter data for a Natural Language Processing project focused on the Presidential debates 2020. For this project I collected, a total amount of 325.314 unique tweets, during and immediately after the first and second presidential debate 2020. To do this I used R software, R Studio, Twitter Rest API, and R markdown and Distill for this site.
+author:
+  - name: Alexander Dernild
+    url: https://dernild.dk
+    #orcid_id: 0000-0002-6055-8271
+date: 11-19-2020
+bibliography: 
+  - Rpackages.bib
+csl: ../../bib/apa.csl
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(rmarkdown)
+
+# Setting up bibliography
+library(bibtex)
+libraries <- c("rtweet") 
+write.bib(libraries, file = "Rpackages.bib")
+```
+
+### Configuring application and access token to connect to Twitter API
+
+In order to collect tweets I had to apply for an API key from Twitter[^1]. Luckily I was fast enough granted access to the Twitter Developers Portal, enabling me to set up an application which can be connected to R.
+
+![Configuring application on Twitter Developer Portal](images/twitterApp1.png) ![Configuring application on Twitter Developer Portal, making sure the callback URL is set to 127.0.0.1:1410](images/twitterApp2.png) *Figure 1.1 Configuring application on Twitter Developer Portal*
+
+Connecting the newly created application to R, an access token has to be created using the application's API key and secret. I used the create_token() function from rtweet package [@rtweet] to do this, configuring it as follows.
+```r
+library(rtweet)
+
+key <- 'XXXXXXXXXXXXXXXXX'
+secret <- 'XXXXXXXXXXXXXXXXXX'
+     
+# Connecting to Twitter API
+twitter_token <- create_token(
+ app = "presidentialdebate",
+ consumer_key = key,
+ consumer_secret = secret
+)
+```
+Having set up a token, tweets can now be searched using the search_tweets() function with the main parameters being q (Query to be searched) and n (total number of desired tweets). As I wanted to perform multiple queries with different keywords, number of tweets and time frames, around both the first and second presidential debate, I decided to create a .csv file with the specifications of each query.
+
+```{r}
+ref <- read.csv("http://raw.githubusercontent.com/ADernild/pres_debate/main/twitter_data.csv")
+paged_table(ref, list(rows.print = 10))
+```
+
+The .csv file could then be looped through, passing the specified parameters to search_tweets() at each iteration. For this purpose I wrapped search_tweets() along with saveRDS() to save the queries as .rds files, in a new function I named twitter_grab(). 
+
+```r
+twitter_grab <- function(term, n, since, until, type, file) {
+  tweets <- search_tweets(q = term,
+                          n = n,
+                          include_rts = FALSE,
+                          lang = "en",
+                          since = since,
+                          until = until,
+                          type = type,
+                          retryonratelimit = TRUE
+  )
+  
+  saveRDS(tweets, file = file)
+  cat(file, "saved")
+}
+```
+
+
+```r
+# Grabbing tweets programmatically
+ref <- read.csv('twitter_data.csv', stringsAsFactors = FALSE) # .csv file containing paths and search specs
+
+# Looping throug data.frame ref calling twitter_grab() function
+for (row in 32:nrow(ref)) {
+  twitter_grab(
+    ref$term[row],
+    ref$n[row],
+    ref$since[row],
+    ref$until[row],
+    ref$type[row],
+    ref$path[row]
+  )
+}
+```
+
+
+[^1]: Twitter grants API keys based on use case and application, documentation, terms and application form can be found [here](https://developer.twitter.com/en)
+
