@@ -3,11 +3,10 @@ title: "Alexander Dernild"
 description: |
   Personal website/blog by Alexander Dernild showcasing Data Science projects.
 output_dir: "_site"
-theme: theme.css
+theme: src/css/theme.css
 base_url: https://dernild.com
 repository_url: https://github.com/ADernild/distill_blog_dernild.com
-google_analytics: "G-CFSZYDMJDG"
-favicon: images/circle-cropped-profile-pic.png
+favicon: src/images/circle-cropped-profile-pic.png
 collections:
   posts:
     share: [twitter, linkedin, facebook]
@@ -15,8 +14,8 @@ twitter:
   site: "@ADernild"
   creator: "@ADernild"
 navbar:
-  logo: 
-    image: images/circle-cropped-profile-pic.png
+  logo:
+    image: src/images/circle-cropped-profile-pic.png
     href: index.html
   left:
     - text: "About me"

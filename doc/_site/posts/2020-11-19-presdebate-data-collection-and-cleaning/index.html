@@ -90,7 +90,7 @@ code span.wa { color: #545454; font-weight: bold; font-style: italic; } /* Warni
 <meta property="description" itemprop="description" content="In this post I intend to describe and showcase the more technical aspects, of the data collection and cleaning process of Twitter data for a Natural Language Processing project focused on the Presidential debates 2020. For this project I collected, a total amount of 325.314 unique tweets, during and immediately after the first and second presidential debate 2020. To do this I used R software, R Studio, Twitter Rest API, and R markdown and Distill for this site."/>
 
 <link rel="canonical" href="https://dernild.com/posts/2020-11-19-presdebate-data-collection-and-cleaning/"/>
-<link rel="icon" type="image/png" href="../../images/circle-cropped-profile-pic.png"/>
+<link rel="icon" type="image/png" href="../../src/images/circle-cropped-profile-pic.png"/>
 
 <!--  https://schema.org/Article -->
 <meta property="article:published" itemprop="datePublished" content="2020-11-19"/>
@@ -124,12 +124,12 @@ code span.wa { color: #545454; font-weight: bold; font-style: italic; } /* Warni
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","bibliography","csl","output","citation_url","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["Data Collection and Cleaning"]},{"type":"character","attributes":{},"value":["In this post I intend to describe and showcase the more technical aspects, of the data collection and cleaning process of Twitter data for a Natural Language Processing project focused on the Presidential debates 2020. For this project I collected, a total amount of 325.314 unique tweets, during and immediately after the first and second presidential debate 2020. To do this I used R software, R Studio, Twitter Rest API, and R markdown and Distill for this site."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Alexander Dernild"]},{"type":"character","attributes":{},"value":["https://dernild.com"]}]}]},{"type":"character","attributes":{},"value":["11-19-2020"]},{"type":"character","attributes":{},"value":["Rpackages.bib"]},{"type":"character","attributes":{},"value":["../../bib/apa.csl"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"character","attributes":{},"value":["https://dernild.com/posts/2020-11-19-presdebate-data-collection-and-cleaning/"]},{"type":"character","attributes":{},"value":["https://dernild.com/posts/2020-11-19-presdebate-data-collection-and-cleaning/"]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","bibliography","csl","output","citation_url","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["Data Collection and Cleaning"]},{"type":"character","attributes":{},"value":["In this post I intend to describe and showcase the more technical aspects, of the data collection and cleaning process of Twitter data for a Natural Language Processing project focused on the Presidential debates 2020. For this project I collected, a total amount of 325.314 unique tweets, during and immediately after the first and second presidential debate 2020. To do this I used R software, R Studio, Twitter Rest API, and R markdown and Distill for this site."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Alexander Dernild"]},{"type":"character","attributes":{},"value":["https://dernild.com"]}]}]},{"type":"character","attributes":{},"value":["11-19-2020"]},{"type":"character","attributes":{},"value":["src/.bib/bib.bib"]},{"type":"character","attributes":{},"value":["../../src/.bib/apa.csl"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"character","attributes":{},"value":["https://dernild.com/posts/2020-11-19-presdebate-data-collection-and-cleaning/"]},{"type":"character","attributes":{},"value":["https://dernild.com/posts/2020-11-19-presdebate-data-collection-and-cleaning/"]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["images/twitterApp1.png","images/twitterApp2.png","presdebate-data-collection-and-cleaning_files/anchor-4.2.2/anchor.min.js","presdebate-data-collection-and-cleaning_files/bib/apa.csl","presdebate-data-collection-and-cleaning_files/bib/bib.bib","presdebate-data-collection-and-cleaning_files/bib/csl.csl","presdebate-data-collection-and-cleaning_files/bib/Rpackages.bib","presdebate-data-collection-and-cleaning_files/bowser-1.9.3/bowser.min.js","presdebate-data-collection-and-cleaning_files/distill-2.2.21/template.v2.js","presdebate-data-collection-and-cleaning_files/header-attrs-2.5/header-attrs.js","presdebate-data-collection-and-cleaning_files/jquery-1.11.3/jquery.min.js","presdebate-data-collection-and-cleaning_files/pagedtable-1.1/css/pagedtable.css","presdebate-data-collection-and-cleaning_files/pagedtable-1.1/js/pagedtable.js","presdebate-data-collection-and-cleaning_files/webcomponents-2.0.0/webcomponents.js","Rpackages.bib"]}
+  {"type":"character","attributes":{},"value":["presdebate-data-collection-and-cleaning_files/anchor-4.2.2/anchor.min.js","presdebate-data-collection-and-cleaning_files/bowser-1.9.3/bowser.min.js","presdebate-data-collection-and-cleaning_files/distill-2.2.21/template.v2.js","presdebate-data-collection-and-cleaning_files/header-attrs-2.5/header-attrs.js","presdebate-data-collection-and-cleaning_files/jquery-1.11.3/jquery.min.js","presdebate-data-collection-and-cleaning_files/pagedtable-1.1/css/pagedtable.css","presdebate-data-collection-and-cleaning_files/pagedtable-1.1/js/pagedtable.js","presdebate-data-collection-and-cleaning_files/webcomponents-2.0.0/webcomponents.js","src/images/twitterApp1.png","src/images/twitterApp2.png"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2324,13 +2324,6 @@ d-appendix d-footnote-list a.footnote-backlink {
   <script src="../../site_libs/webcomponents-2.0.0/webcomponents.js"></script>
   <script src="../../site_libs/distill-2.2.21/template.v2.js"></script>
   <!--radix_placeholder_site_in_header-->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CFSZYDMJDG"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-CFSZYDMJDG');
-</script>
 <!--/radix_placeholder_site_in_header-->
 
 
@@ -2350,7 +2343,7 @@ gtag('config', 'G-CFSZYDMJDG');
 <nav class="distill-site-nav distill-site-header">
 <div class="nav-left">
 <a class="logo" href="../../index.html">
-<img src="../../images/circle-cropped-profile-pic.png" alt="Logo"/>
+<img src="../../src/images/circle-cropped-profile-pic.png" alt="Logo"/>
 </a>
 <a href="../../index.html" class="title">Alexander Dernild</a>
 <a href="../../about.html">About me</a>
@@ -2391,9 +2384,14 @@ gtag('config', 'G-CFSZYDMJDG');
 </div>
 
 <div class="d-article">
-<h3 id="configuring-application-and-access-token-to-connect-to-twitter-api">Configuring application and access token to connect to Twitter API</h3>
+<h2 id="connecting-to-the-twitter-api">Connecting to the Twitter API</h2>
+<blockquote>
+<p>Twitter is built on the robust conversations happening around the world via Tweets. With Twitter’s API platform, you’ll find endpoints to capitalize on the functionality and data contained within Tweets, and to build great experiences and solutions for your customers. These endpoints enable you to manage your Tweets, publish and curate Tweets, filter and search for Tweet topics or trends, and much more <span class="citation" data-cites="devtwitter">(<a href="#ref-devtwitter" role="doc-biblioref">Twitter, 2020</a>)</span>.</p>
+</blockquote>
+<h3 id="twitter-developer-portal---setting-up-an-application">Twitter Developer Portal - Setting up an application</h3>
 <p>In order to collect tweets I had to apply for an API key from Twitter<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Luckily I was fast enough granted access to the Twitter Developers Portal, enabling me to set up an application which can be connected to R.</p>
 <p><img src="images/twitterApp1.png" alt="Configuring application on Twitter Developer Portal" /> <img src="images/twitterApp2.png" alt="Configuring application on Twitter Developer Portal, making sure the callback URL is set to 127.0.0.1:1410" /> <em>Figure 1.1 Configuring application on Twitter Developer Portal</em></p>
+<h3 id="creating-an-access-token-in-r">Creating an Access Token in R</h3>
 <p>Connecting the newly created application to R, an access token has to be created using the application’s API key and secret. I used the create_token() function from rtweet package <span class="citation" data-cites="rtweet">(<a href="#ref-rtweet" role="doc-biblioref">Kearney, 2019</a>)</span> to do this, configuring it as follows.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rtweet)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -2406,6 +2404,7 @@ gtag('config', 'G-CFSZYDMJDG');
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a> <span class="at">consumer_key =</span> key,</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a> <span class="at">consumer_secret =</span> secret</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<h2 id="searching-tweets">Searching tweets</h2>
 <p>Having set up a token, tweets can now be searched using the search_tweets() function with the main parameters being q (Query to be searched) and n (total number of desired tweets). As I wanted to perform multiple queries with different keywords, number of tweets and time frames, around both the first and second presidential debate, I decided to create a .csv file with the specifications of each query.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div data-pagedtable="false">
@@ -2447,6 +2446,9 @@ gtag('config', 'G-CFSZYDMJDG');
 <div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
 <div id="ref-rtweet" class="csl-entry" role="doc-biblioentry">
 Kearney, M. W. (2019). Rtweet: Collecting and analyzing twitter data. <em>Journal of Open Source Software</em>, <em>4</em>(42), 1829. <a href="https://doi.org/10.21105/joss.01829">https://doi.org/10.21105/joss.01829</a>
+</div>
+<div id="ref-devtwitter" class="csl-entry" role="doc-biblioentry">
+Twitter. (2020). <em><span class="nocase">Publish and manage Tweets, and analyze Tweet data</span></em>. <a href="https://developer.twitter.com/en/use-cases">https://developer.twitter.com/en/use-cases</a>
 </div>
 </div>
 <section class="footnotes" role="doc-endnotes">

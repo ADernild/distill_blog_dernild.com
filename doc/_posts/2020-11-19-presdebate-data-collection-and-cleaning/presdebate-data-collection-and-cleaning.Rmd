@@ -7,9 +7,8 @@ author:
     url: https://dernild.com
     #orcid_id: 0000-0002-6055-8271
 date: 11-19-2020
-bibliography: 
-  - Rpackages.bib
-csl: ../../bib/apa.csl
+bibliography: src/.bib/bib.bib
+csl: ../../src/.bib/apa.csl
 output:
   distill::distill_article:
     self_contained: false
@@ -18,20 +17,28 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 library(rmarkdown)
+library(rtweet)
 
 # Setting up bibliography
 library(bibtex)
-libraries <- c("rtweet") 
-write.bib(libraries, file = "Rpackages.bib")
+write.bib(.packages(), file = "src/.bib/bib")
+write.bib(read.bib("../../src/.bib/pres_debate.bib"), file = "src/.bib/bib", append = TRUE)
 ```
 
-### Configuring application and access token to connect to Twitter API
+## Connecting to the Twitter API
+
+> Twitter is built on the robust conversations happening around the world via Tweets. With Twitter’s API platform, you’ll find endpoints to capitalize on the functionality and data contained within Tweets, and to build great experiences and solutions for your customers. These endpoints enable you to manage your Tweets, publish and curate Tweets, filter and search for Tweet topics or trends, and much more [@devtwitter].
+
+### Twitter Developer Portal - Setting up an application
 
 In order to collect tweets I had to apply for an API key from Twitter[^1]. Luckily I was fast enough granted access to the Twitter Developers Portal, enabling me to set up an application which can be connected to R.
 
 ![Configuring application on Twitter Developer Portal](images/twitterApp1.png) ![Configuring application on Twitter Developer Portal, making sure the callback URL is set to 127.0.0.1:1410](images/twitterApp2.png) *Figure 1.1 Configuring application on Twitter Developer Portal*
 
+### Creating an Access Token in R
+
 Connecting the newly created application to R, an access token has to be created using the application's API key and secret. I used the create_token() function from rtweet package [@rtweet] to do this, configuring it as follows.
+
 ```r
 library(rtweet)
 
@@ -45,6 +52,8 @@ twitter_token <- create_token(
  consumer_secret = secret
 )
 ```
+## Searching tweets
+
 Having set up a token, tweets can now be searched using the search_tweets() function with the main parameters being q (Query to be searched) and n (total number of desired tweets). As I wanted to perform multiple queries with different keywords, number of tweets and time frames, around both the first and second presidential debate, I decided to create a .csv file with the specifications of each query.
 
 ```{r}

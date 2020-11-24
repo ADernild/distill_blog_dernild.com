@@ -1,5 +1,6 @@
 ---
 title: "About me"
+site: distill::distill_website
 description: |
   Alexander Dernild
 ---
@@ -10,11 +11,11 @@ knitr::opts_chunk$set(echo = FALSE)
 
 As a part of my journey towards learning Data Science, I have created this website/blog to showcase my projects, articles and other good stuff. If you have any questions about any of the content on this site, feel free to contact me at alex@dernild.dk.
 
-My name is Alexander Dernild, I'm 23 years old and from Denmark. I have a bachelor's degree in Sociology and Cultural Analysis and I'm currently pursuing a master's degree in Data Science, with the specialization Human Informatics at University of Southern Denmark.
+My name is Alexander Dernild, I'm 24 years old and from Denmark. I have a bachelor's degree in Sociology and Cultural Analysis and I'm currently pursuing a master's degree in Data Science, with the specialization Human Informatics at University of Southern Denmark.
 
 #### Academic interests
 
-My academic interests include but are not limited to: Cultural Sociology, Sociology of Everyday Life, Environmental Sociology, Computational Linguistics, Computational methods for Social Sciences & Philosophical underpinnings of Social Sciences research. 
+My academic interests include but are not limited to: Cultural Sociology, Sociology of Everyday Life, Environmental Sociology, Computational Linguistics, Computational methods for Social Sciences & Philosophical underpinnings of Social Sciences research.
 
 ***
 
@@ -23,4 +24,3 @@ My academic interests include but are not limited to: Cultural Sociology, Sociol
 xfun::file_string('timeline.html')
 ```
 ```
-
