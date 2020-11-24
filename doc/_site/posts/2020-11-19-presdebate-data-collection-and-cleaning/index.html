@@ -2390,7 +2390,7 @@ d-appendix d-footnote-list a.footnote-backlink {
 </blockquote>
 <h3 id="twitter-developer-portal---setting-up-an-application">Twitter Developer Portal - Setting up an application</h3>
 <p>In order to collect tweets I had to apply for an API key from Twitter<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Luckily I was fast enough granted access to the Twitter Developers Portal, enabling me to set up an application which can be connected to R.</p>
-<p><img src="images/twitterApp1.png" alt="Configuring application on Twitter Developer Portal" /> <img src="images/twitterApp2.png" alt="Configuring application on Twitter Developer Portal, making sure the callback URL is set to 127.0.0.1:1410" /> <em>Figure 1.1 Configuring application on Twitter Developer Portal</em></p>
+<p><img src="src/images/twitterApp1.png" alt="Configuring application on Twitter Developer Portal" /> <img src="src/images/twitterApp2.png" alt="Configuring application on Twitter Developer Portal, making sure the callback URL is set to 127.0.0.1:1410" /> <em>Figure 1.1 Configuring application on Twitter Developer Portal</em></p>
 <h3 id="creating-an-access-token-in-r">Creating an Access Token in R</h3>
 <p>Connecting the newly created application to R, an access token has to be created using the application’s API key and secret. I used the create_token() function from rtweet package <span class="citation" data-cites="rtweet">(<a href="#ref-rtweet" role="doc-biblioref">Kearney, 2019</a>)</span> to do this, configuring it as follows.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rtweet)</span>
@@ -2406,6 +2406,8 @@ d-appendix d-footnote-list a.footnote-backlink {
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <h2 id="searching-tweets">Searching tweets</h2>
 <p>Having set up a token, tweets can now be searched using the search_tweets() function with the main parameters being q (Query to be searched) and n (total number of desired tweets). As I wanted to perform multiple queries with different keywords, number of tweets and time frames, around both the first and second presidential debate, I decided to create a .csv file with the specifications of each query.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Grabbing tweets programmatically using a .csv file</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ref <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;twitter_data.csv&#39;</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>) <span class="co"># .csv file containing paths and search specs</span></span></code></pre></div>
 <div class="layout-chunk" data-layout="l-body">
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -2414,35 +2416,32 @@ d-appendix d-footnote-list a.footnote-backlink {
 </div>
 </div>
 <p>The .csv file could then be looped through, passing the specified parameters to search_tweets() at each iteration. For this purpose I wrapped search_tweets() along with saveRDS() to save the queries as .rds files, in a new function I named twitter_grab().</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>twitter_grab <span class="ot">&lt;-</span> <span class="cf">function</span>(term, n, since, until, type, file) {</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  tweets <span class="ot">&lt;-</span> <span class="fu">search_tweets</span>(<span class="at">q =</span> term,</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">n =</span> n,</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">include_rts =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">lang =</span> <span class="st">&quot;en&quot;</span>,</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">since =</span> since,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                          <span class="at">until =</span> until,</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">type =</span> type,</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                          <span class="at">retryonratelimit =</span> <span class="cn">TRUE</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">saveRDS</span>(tweets, <span class="at">file =</span> file)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(file, <span class="st">&quot;saved&quot;</span>)</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Grabbing tweets programmatically</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>ref <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;twitter_data.csv&#39;</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>) <span class="co"># .csv file containing paths and search specs</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Looping throug data.frame ref calling twitter_grab() function</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (row <span class="cf">in</span> <span class="dv">32</span><span class="sc">:</span><span class="fu">nrow</span>(ref)) {</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">twitter_grab</span>(</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    ref<span class="sc">$</span>term[row],</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    ref<span class="sc">$</span>n[row],</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    ref<span class="sc">$</span>since[row],</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    ref<span class="sc">$</span>until[row],</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    ref<span class="sc">$</span>type[row],</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    ref<span class="sc">$</span>path[row]</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>twitter_grab <span class="ot">&lt;-</span> <span class="cf">function</span>(term, n, since, until, type, file) {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  tweets <span class="ot">&lt;-</span> <span class="fu">search_tweets</span>(<span class="at">q =</span> term,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">n =</span> n,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">include_rts =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">lang =</span> <span class="st">&quot;en&quot;</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">since =</span> since,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                          <span class="at">until =</span> until,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">type =</span> type,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                          <span class="at">retryonratelimit =</span> <span class="cn">TRUE</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">saveRDS</span>(tweets, <span class="at">file =</span> file)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(file, <span class="st">&quot;saved&quot;</span>)</span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Looping throug data.frame ref calling twitter_grab() function</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (row <span class="cf">in</span> <span class="dv">32</span><span class="sc">:</span><span class="fu">nrow</span>(ref)) {</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">twitter_grab</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    ref<span class="sc">$</span>term[row],</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    ref<span class="sc">$</span>n[row],</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    ref<span class="sc">$</span>since[row],</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    ref<span class="sc">$</span>until[row],</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    ref<span class="sc">$</span>type[row],</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    ref<span class="sc">$</span>path[row]</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
 <div id="ref-rtweet" class="csl-entry" role="doc-biblioentry">
 Kearney, M. W. (2019). Rtweet: Collecting and analyzing twitter data. <em>Journal of Open Source Software</em>, <em>4</em>(42), 1829. <a href="https://doi.org/10.21105/joss.01829">https://doi.org/10.21105/joss.01829</a>

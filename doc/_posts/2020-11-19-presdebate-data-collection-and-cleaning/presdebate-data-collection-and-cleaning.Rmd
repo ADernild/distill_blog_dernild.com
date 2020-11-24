@@ -33,7 +33,7 @@ write.bib(read.bib("../../src/.bib/pres_debate.bib"), file = "src/.bib/bib", app
 
 In order to collect tweets I had to apply for an API key from Twitter[^1]. Luckily I was fast enough granted access to the Twitter Developers Portal, enabling me to set up an application which can be connected to R.
 
-![Configuring application on Twitter Developer Portal](images/twitterApp1.png) ![Configuring application on Twitter Developer Portal, making sure the callback URL is set to 127.0.0.1:1410](images/twitterApp2.png) *Figure 1.1 Configuring application on Twitter Developer Portal*
+![Configuring application on Twitter Developer Portal](src/images/twitterApp1.png) ![Configuring application on Twitter Developer Portal, making sure the callback URL is set to 127.0.0.1:1410](src/images/twitterApp2.png) *Figure 1.1 Configuring application on Twitter Developer Portal*
 
 ### Creating an Access Token in R
 
@@ -55,6 +55,11 @@ twitter_token <- create_token(
 ## Searching tweets
 
 Having set up a token, tweets can now be searched using the search_tweets() function with the main parameters being q (Query to be searched) and n (total number of desired tweets). As I wanted to perform multiple queries with different keywords, number of tweets and time frames, around both the first and second presidential debate, I decided to create a .csv file with the specifications of each query.
+
+```r
+# Grabbing tweets programmatically using a .csv file
+ref <- read.csv('twitter_data.csv', stringsAsFactors = FALSE) # .csv file containing paths and search specs
+```
 
 ```{r}
 ref <- read.csv("http://raw.githubusercontent.com/ADernild/pres_debate/main/twitter_data.csv")
@@ -82,9 +87,6 @@ twitter_grab <- function(term, n, since, until, type, file) {
 
 
 ```r
-# Grabbing tweets programmatically
-ref <- read.csv('twitter_data.csv', stringsAsFactors = FALSE) # .csv file containing paths and search specs
-
 # Looping throug data.frame ref calling twitter_grab() function
 for (row in 32:nrow(ref)) {
   twitter_grab(
