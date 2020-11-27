@@ -9,9 +9,9 @@ description: |
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-As a part of my journey towards learning Data Science, I have created this website/blog to showcase my projects, articles and other good stuff. If you have any questions about any of the content on this site, feel free to contact me at alex@dernild.dk.
+Hi and welcome to this site! My name is Alexander Dernild and I'm a master's student from Denmark. I hold a bachelor's degree in Sociology and Cultural Analysis and am currently pursuing a master's degree in Data Science, specializing in Human Informatics at University of Southern Denmark.
 
-My name is Alexander Dernild, I'm 24 years old and from Denmark. I have a bachelor's degree in Sociology and Cultural Analysis and I'm currently pursuing a master's degree in Data Science, with the specialization Human Informatics at University of Southern Denmark.
+As a part of my journey towards learning Data Science, I have created this website/blog to showcase my projects, articles and other good stuff. If you have any questions, feedback or concerns, about any of the content on this site, feel free to contact me at alex@dernild.dk.
 
 #### Academic interests
 
