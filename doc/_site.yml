@@ -6,12 +6,11 @@ output_dir: "_site"
 theme: src/css/theme.css
 base_url: https://dernild.com
 repository_url: https://github.com/ADernild/distill_blog_dernild.com
-cookie_consent:
-  style: "simple"
-  type: "express"
-  palette: "light"
-  lang: "en"
 google_analytics: "G-CFSZYDMJDG"
+cookie_consent:
+  style: light
+  type: express
+  lang: en
 favicon: src/images/circle-cropped-profile-pic.png
 collections:
   posts:
