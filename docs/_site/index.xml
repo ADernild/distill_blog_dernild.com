@@ -14,15 +14,16 @@
     <generator>Distill</generator>
     <lastBuildDate>Wed, 02 Dec 2020 00:00:00 +0000</lastBuildDate>
     <item>
-      <title>Collecting and cleaning Tweets for a NLP project</title>
+      <title>Collecting and preparing Tweets for a NLP project</title>
       <dc:creator>Alexander Dernild</dc:creator>
-      <link>https://dernild.com/posts/2020-12-02-collecting-and-cleaning-tweets-for-a-nlp-project</link>
+      <link>https://dernild.com/posts/2020-12-02-collecting-and-preparing-tweets-for-a-nlp-project</link>
       <description>As a part of a Natural Language Processing project, focused on the US presidential debates and election 2020, I collected a total amount of 325.314 unique tweets. In this post, I will explain how I managed to do this, utilizing Twitter's API and R Studio.</description>
       <category>Twitter Data</category>
       <category>NLP</category>
       <category>pres_debate</category>
-      <guid>https://dernild.com/posts/2020-12-02-collecting-and-cleaning-tweets-for-a-nlp-project</guid>
+      <guid>https://dernild.com/posts/2020-12-02-collecting-and-preparing-tweets-for-a-nlp-project</guid>
       <pubDate>Wed, 02 Dec 2020 00:00:00 +0000</pubDate>
+      <media:content url="https://dernild.com/posts/2020-12-02-collecting-and-preparing-tweets-for-a-nlp-project/../../src/images/collecting_tweets_preview.png" medium="image" type="image/png" width="780" height="460"/>
     </item>
   </channel>
 </rss>

@@ -85,7 +85,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-  <title>Collecting and cleaning Tweets for a NLP project</title>
+  <title>Collecting and preparing Tweets for a NLP project</title>
 
   <meta property="description" itemprop="description" content="As a part of a Natural Language Processing project, focused on the US presidential debates and election 2020, I collected a total amount of 325.314 unique tweets. In this post, I will explain how I managed to do this, utilizing Twitter&#39;s API and R Studio."/>
 
@@ -96,14 +96,14 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <meta name="article:author" content="Alexander Dernild"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Collecting and cleaning Tweets for a NLP project"/>
+  <meta property="og:title" content="Collecting and preparing Tweets for a NLP project"/>
   <meta property="og:type" content="article"/>
   <meta property="og:description" content="As a part of a Natural Language Processing project, focused on the US presidential debates and election 2020, I collected a total amount of 325.314 unique tweets. In this post, I will explain how I managed to do this, utilizing Twitter&#39;s API and R Studio."/>
   <meta property="og:locale" content="en_US"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Collecting and cleaning Tweets for a NLP project"/>
+  <meta property="twitter:title" content="Collecting and preparing Tweets for a NLP project"/>
   <meta property="twitter:description" content="As a part of a Natural Language Processing project, focused on the US presidential debates and election 2020, I collected a total amount of 325.314 unique tweets. In this post, I will explain how I managed to do this, utilizing Twitter&#39;s API and R Studio."/>
 
   <!--/radix_placeholder_meta_tags-->
@@ -112,12 +112,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","categories","author","date","bibliography","csl","output"]}},"value":[{"type":"character","attributes":{},"value":["Collecting and cleaning Tweets for a NLP project"]},{"type":"character","attributes":{},"value":["As a part of a Natural Language Processing project, focused on the US presidential debates and election 2020, I collected a total amount of 325.314 unique tweets. In this post, I will explain how I managed to do this, utilizing Twitter's API and R Studio.\n"]},{"type":"character","attributes":{},"value":["Twitter Data","NLP","pres_debate"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Alexander Dernild"]},{"type":"character","attributes":{},"value":["https://github.com/ADernild"]}]}]},{"type":"character","attributes":{},"value":["12-02-2020"]},{"type":"character","attributes":{},"value":[".bib/bib.bib"]},{"type":"character","attributes":{},"value":["../../src/.bib/apa.csl"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[false]}]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","categories","author","date","bibliography","csl","preview","output"]}},"value":[{"type":"character","attributes":{},"value":["Collecting and preparing Tweets for a NLP project"]},{"type":"character","attributes":{},"value":["As a part of a Natural Language Processing project, focused on the US presidential debates and election 2020, I collected a total amount of 325.314 unique tweets. In this post, I will explain how I managed to do this, utilizing Twitter's API and R Studio.\n"]},{"type":"character","attributes":{},"value":["Twitter Data","NLP","pres_debate"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Alexander Dernild"]},{"type":"character","attributes":{},"value":["https://github.com/ADernild"]}]}]},{"type":"character","attributes":{},"value":["12-02-2020"]},{"type":"character","attributes":{},"value":[".bib/bib.bib"]},{"type":"character","attributes":{},"value":["../../src/.bib/apa.csl"]},{"type":"character","attributes":{},"value":["../../src/images/collecting_tweets_preview.png"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[false]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["collecting-and-cleaning-tweets-for-a-nlp-project_files/anchor-4.2.2/anchor.min.js","collecting-and-cleaning-tweets-for-a-nlp-project_files/bowser-1.9.3/bowser.min.js","collecting-and-cleaning-tweets-for-a-nlp-project_files/distill-2.2.21/template.v2.js","collecting-and-cleaning-tweets-for-a-nlp-project_files/header-attrs-2.5/header-attrs.js","collecting-and-cleaning-tweets-for-a-nlp-project_files/jquery-1.11.3/jquery.min.js","collecting-and-cleaning-tweets-for-a-nlp-project_files/pagedtable-1.1/css/pagedtable.css","collecting-and-cleaning-tweets-for-a-nlp-project_files/pagedtable-1.1/js/pagedtable.js","collecting-and-cleaning-tweets-for-a-nlp-project_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["collecting-and-preparing-tweets-for-a-nlp-project_files/anchor-4.2.2/anchor.min.js","collecting-and-preparing-tweets-for-a-nlp-project_files/bowser-1.9.3/bowser.min.js","collecting-and-preparing-tweets-for-a-nlp-project_files/distill-2.2.21/template.v2.js","collecting-and-preparing-tweets-for-a-nlp-project_files/header-attrs-2.5/header-attrs.js","collecting-and-preparing-tweets-for-a-nlp-project_files/jquery-1.11.3/jquery.min.js","collecting-and-preparing-tweets-for-a-nlp-project_files/pagedtable-1.1/css/pagedtable.css","collecting-and-preparing-tweets-for-a-nlp-project_files/pagedtable-1.1/js/pagedtable.js","collecting-and-preparing-tweets-for-a-nlp-project_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1405,14 +1405,14 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="collecting-and-cleaning-tweets-for-a-nlp-project_files/header-attrs-2.5/header-attrs.js"></script>
-  <link href="collecting-and-cleaning-tweets-for-a-nlp-project_files/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
-  <script src="collecting-and-cleaning-tweets-for-a-nlp-project_files/pagedtable-1.1/js/pagedtable.js"></script>
-  <script src="collecting-and-cleaning-tweets-for-a-nlp-project_files/jquery-1.11.3/jquery.min.js"></script>
-  <script src="collecting-and-cleaning-tweets-for-a-nlp-project_files/anchor-4.2.2/anchor.min.js"></script>
-  <script src="collecting-and-cleaning-tweets-for-a-nlp-project_files/bowser-1.9.3/bowser.min.js"></script>
-  <script src="collecting-and-cleaning-tweets-for-a-nlp-project_files/webcomponents-2.0.0/webcomponents.js"></script>
-  <script src="collecting-and-cleaning-tweets-for-a-nlp-project_files/distill-2.2.21/template.v2.js"></script>
+  <script src="collecting-and-preparing-tweets-for-a-nlp-project_files/header-attrs-2.5/header-attrs.js"></script>
+  <link href="collecting-and-preparing-tweets-for-a-nlp-project_files/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+  <script src="collecting-and-preparing-tweets-for-a-nlp-project_files/pagedtable-1.1/js/pagedtable.js"></script>
+  <script src="collecting-and-preparing-tweets-for-a-nlp-project_files/jquery-1.11.3/jquery.min.js"></script>
+  <script src="collecting-and-preparing-tweets-for-a-nlp-project_files/anchor-4.2.2/anchor.min.js"></script>
+  <script src="collecting-and-preparing-tweets-for-a-nlp-project_files/bowser-1.9.3/bowser.min.js"></script>
+  <script src="collecting-and-preparing-tweets-for-a-nlp-project_files/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="collecting-and-preparing-tweets-for-a-nlp-project_files/distill-2.2.21/template.v2.js"></script>
   <!--radix_placeholder_site_in_header-->
   <!--/radix_placeholder_site_in_header-->
 
@@ -1424,7 +1424,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Collecting and cleaning Tweets for a NLP project","description":"As a part of a Natural Language Processing project, focused on the US presidential debates and election 2020, I collected a total amount of 325.314 unique tweets. In this post, I will explain how I managed to do this, utilizing Twitter's API and R Studio.","authors":[{"author":"Alexander Dernild","authorURL":"https://github.com/ADernild","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2020-12-02T00:00:00.000+01:00","citationText":"Dernild, 2020"}
+{"title":"Collecting and preparing Tweets for a NLP project","description":"As a part of a Natural Language Processing project, focused on the US presidential debates and election 2020, I collected a total amount of 325.314 unique tweets. In this post, I will explain how I managed to do this, utilizing Twitter's API and R Studio.","authors":[{"author":"Alexander Dernild","authorURL":"https://github.com/ADernild","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2020-12-02T00:00:00.000+01:00","citationText":"Dernild, 2020"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1434,7 +1434,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Collecting and cleaning Tweets for a NLP project</h1>
+<h1>Collecting and preparing Tweets for a NLP project</h1>
 <!--radix_placeholder_categories-->
 <div class="dt-tags">
 <div class="dt=tag">Twitter Data</div>
@@ -1461,6 +1461,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <li><a href="#twitter-developer-portal---setting-up-an-application">Twitter Developer Portal - Setting up an application</a></li>
 <li><a href="#connecting-r-to-the-twitter-api">Connecting R to the Twitter API</a></li>
 <li><a href="#collecting-tweets">Collecting Tweets</a></li>
+</ul></li>
+<li><a href="#cleaning-text-variable-in-twitter-data">Cleaning text variable in Twitter Data</a>
+<ul>
+<li><a href="#programmatically-cleaning-twitter-data">Programmatically cleaning Twitter data</a></li>
+<li><a href="#joining-multiple-twitter-queries">Joining multiple Twitter queries</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -1546,7 +1551,57 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 </div>
 <p>In total the Twitter data collection resulted in 42 queries (one for each row in twitter_data.csv), which was then saved as 42 individual RData (.rds) files.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<h2 id="cleaning-text-variable-in-twitter-data">Cleaning text variable in Twitter Data</h2>
+<p>Now that I have collected the Tweets, in order to use this data in a Natural Language Processing project, the text variable needs to be cleaned, i.e., removing links, mentions, hashtags and other special characters. To do this, I found some different examples on StackOverflow, using reprex to clean Tweets and modified this into a function:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Cleaning function modified from StackOverflow </span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>clean_tweets <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">%&gt;%</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_remove_all</span>(<span class="st">&quot; ?(f|ht)(tp)(s?)(://)(.*)[.|/](.*)&quot;</span>) <span class="sc">%&gt;%</span> <span class="co">#removes links</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_replace_all</span>(<span class="st">&quot;&amp;amp;&quot;</span>, <span class="st">&quot;and&quot;</span>) <span class="sc">%&gt;%</span>  <span class="co">#replaces &amp;amp; with and</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_remove_all</span>(<span class="st">&quot;^RT:? &quot;</span>) <span class="sc">%&gt;%</span> <span class="co">#removes retweets</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_remove_all</span>(<span class="st">&quot;@[[:alnum:]]*&quot;</span>) <span class="sc">%&gt;%</span> <span class="co">#removes mentions</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_remove_all</span>(<span class="st">&quot;#[[:alnum:]]*&quot;</span>) <span class="sc">%&gt;%</span> <span class="co">#removes hashtags</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_remove_all</span>(<span class="st">&quot;(?![.,])[[:punct:]]&quot;</span>) <span class="sc">%&gt;%</span> <span class="co">#removes punctuation except . and ,</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_replace_all</span>(<span class="st">&quot;</span><span class="sc">\\\n</span><span class="st">&quot;</span>, <span class="st">&quot; &quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_to_lower</span>() <span class="sc">%&gt;%</span> <span class="co"># Converts to lower case</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_trim</span>(<span class="st">&quot;both&quot;</span>) <span class="co"># Removes whitespace on both sides of string</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="programmatically-cleaning-twitter-data">Programmatically cleaning Twitter data</h3>
+<p>Having a function that can clean the text variable of the Twitter data, I now need to load in the 42 .rds files, clean the text variable, and save 42 new .rds files keeping a backup of the raw data. To do this I will again use twitter_data.csv, first to read in the aforementioned data files, but also to save the cleaned data using the altpath column. Furthermore, Twitter data contains many variables (around 90) and as I’m only interested in looking at a few of these, and also have a backup of the raw data, I will select the variables of interest and retain these in the new data files. To do this I initialize a the R object voi containing the names of the variables to keep.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cleaning tweets programmatically</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>ref <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;twitter_data.csv&#39;</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>) <span class="co"># .csv file containing path and altpath</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>voi <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;user_id&#39;</span>, <span class="st">&#39;status_id&#39;</span>, <span class="st">&#39;created_at&#39;</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;text&#39;</span>, <span class="st">&#39;hashtags&#39;</span>, <span class="st">&#39;location&#39;</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;retweet_count&#39;</span>, <span class="st">&#39;favorite_count&#39;</span>, <span class="st">&#39;followers_count&#39;</span>) <span class="co"># Variables of interest</span></span></code></pre></div>
+<p>Much like when collecting the Tweets I now loop through twitter_data.csv, loading each file using the path column and selecting the variables of interest or voi. Then the text variable of each file, is being passed to my function clean_tweets() before saving the data.frame as a new .rds file using the column altpath in twitter_data.csv.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Looping through ref reading in datasets containing tweets and cleaning text variable</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (row <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(ref)) {</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(ref<span class="sc">$</span>path[row]) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="fu">all_of</span>(voi))</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>text <span class="ot">&lt;-</span> <span class="fu">clean_tweets</span>(df<span class="sc">$</span>text)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">saveRDS</span>(df, ref<span class="sc">$</span>altpath[row])</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Having an individual file for each query is nice for backup purposes, however, for analysis purposes, loading 42 individual files and applying the same operations on each doesn’t seem effective. Therefore, in this next section I will join the files together, to create two distinct data.frames during and after the first and final debate.</p>
+<h3 id="joining-multiple-twitter-queries">Joining multiple Twitter queries</h3>
+<p>In order to join the files together I need to load in the newly created clean .rds files. I do this by creating a list of data.frames and calling it df_list. I then use the function rbindlist, to bind the rows from the files pertaining to the first debate together, and remove duplicates using the function distinct on the variable status_id. The resulting data.frame is then saved as a new .rds file, and the same is done for the files pertaining to the final debate.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading cleaned datasets as list of dataframes</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df_list <span class="ot">&lt;-</span> <span class="fu">lapply</span>(ref<span class="sc">$</span>altpath, readRDS)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>ref_clean <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;twitter_data_clean.csv&#39;</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>) <span class="co"># .csv file containing paths for cleaned data</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Combining cleaned datasets into two dataframes with regard to collection date</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>presdebate_first <span class="ot">&lt;-</span> <span class="fu">rbindlist</span>(df_list[<span class="dv">1</span><span class="sc">:</span><span class="dv">18</span>]) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(status_id, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">saveRDS</span>(ref_clean<span class="sc">$</span>path[<span class="dv">1</span>])</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>presdebate_final <span class="ot">&lt;-</span> <span class="fu">rbindlist</span>(df_list[<span class="dv">19</span><span class="sc">:</span><span class="dv">39</span>]) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(status_id, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">saveRDS</span>(ref_clean<span class="sc">$</span>path[<span class="dv">2</span>])</span></code></pre></div>
+<p>This resulted in two RData .rds files containing a total of 325.314 unique tweets, which are now ready for analysis. If you are interested in checking out this project in more depth, the complete source code can be found on <a href="https://github.com/ADernild/pres_debate">GitHub</a>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
 <div id="ref-rtweet" class="csl-entry" role="doc-biblioentry">
 Kearney, M. W. (2019). Rtweet: Collecting and analyzing twitter data. <em>Journal of Open Source Software</em>, <em>4</em>(42), 1829. <a href="https://doi.org/10.21105/joss.01829">https://doi.org/10.21105/joss.01829</a>

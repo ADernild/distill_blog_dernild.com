@@ -1,5 +1,5 @@
 ---
-title: "Collecting and cleaning Tweets for a NLP project"
+title: "Collecting and preparing Tweets for a NLP project"
 description: |
   As a part of a Natural Language Processing project, focused on the US presidential debates and election 2020, I collected a total amount of 325.314 unique tweets. In this post, I will explain how I managed to do this, utilizing Twitter's API and R Studio.
 categories: 
@@ -12,6 +12,7 @@ author:
 date: 12-02-2020
 bibliography: .bib/bib.bib
 csl: ../../src/.bib/apa.csl
+preview: ../../src/images/collecting_tweets_preview.png
 output:
   distill::distill_article:
     toc: true
@@ -49,7 +50,7 @@ Note: It's important, when configuring an application, to set a callback URL to 
 
 To connect R to the newly created application, an acccess token has to be created, using the application's API key and secret. I used the create_token() function from rtweet package [@rtweet] to do this, configuring it as follows:
 
-``` {.r}
+``` r
 library(rtweet)
 
 key <- 'XXXXXXXXXXXXXXXXX' #this is not a key
@@ -87,7 +88,7 @@ paged_table(ref, list(rows.print = 10, cols.print = 4))
 
 By doing this, I won't have to hard program all these different search specifications, into separate function calls, but can instead programatically pass each row to a search_tweets() call. This could be done by looping through the rows of twitter_data.csv, passing the specified parameters to search_tweets(), and saving the resulting data.frame as a RData (.rds) file at each iteration. For this purpose I wrapped search_tweets() along with saveRDS() to save the queries as .rds files, in a new function I named twitter_grab():
 
-``` {.r}
+``` r
 twitter_grab <- function(term, n, since, until, type, file) {
   tweets <- search_tweets(q = term,
                           n = n,
@@ -106,7 +107,7 @@ twitter_grab <- function(term, n, since, until, type, file) {
 
 As the Twitter API is limited, to only return tweets sent during the past 7 days, I had to collect the data on multiple occasions. First collecting tweets immediately after the first debate, then 7 days after and doing the same for the final debate. There are probably more elegant ways of doing this e.g., Cron jobs, but I decided to call the loop manually on multiple occasions, specifying, when calling the loop, which rows to query at each occasion.
 
-``` {.r}
+``` r
 # Grabbing tweets programmatically using a .csv file
 ref <- read.csv('twitter_data.csv', stringsAsFactors = FALSE) #.csv file containing paths and search specs
 
@@ -132,4 +133,72 @@ paged_table(ref[31:42, ], list(rows.print = 10, cols.print = 4))
 
 In total the Twitter data collection resulted in 42 queries (one for each row in twitter_data.csv), which was then saved as 42 individual RData (.rds) files.
 
+## Cleaning text variable in Twitter Data
 
+Now that I have collected the Tweets, in order to use this data in a Natural Language Processing project, the text variable needs to be cleaned, i.e., removing links, mentions, hashtags and other special characters. To do this, I found some different examples on StackOverflow, using reprex to clean Tweets and modified this into a function:
+
+``` r
+library(tidyverse)
+library(data.table)
+
+# Cleaning function modified from StackOverflow 
+clean_tweets <- function(x) {
+  x %>%
+    str_remove_all(" ?(f|ht)(tp)(s?)(://)(.*)[.|/](.*)") %>% #removes links
+    str_replace_all("&amp;", "and") %>%  #replaces &amp; with and
+    str_remove_all("^RT:? ") %>% #removes retweets
+    str_remove_all("@[[:alnum:]]*") %>% #removes mentions
+    str_remove_all("#[[:alnum:]]*") %>% #removes hashtags
+    str_remove_all("(?![.,])[[:punct:]]") %>% #removes punctuation except . and ,
+    str_replace_all("\\\n", " ") %>% 
+    str_to_lower() %>% # Converts to lower case
+    str_trim("both") # Removes whitespace on both sides of string
+}
+```
+
+### Programmatically cleaning Twitter data
+
+Having a function that can clean the text variable of the Twitter data, I now need to load in the 42 .rds files, clean the text variable, and save 42 new .rds files keeping a backup of the raw data. To do this I will again use twitter_data.csv, first to read in the aforementioned data files, but also to save the cleaned data using the altpath column. Furthermore, Twitter data contains many variables (around 90) and as I'm only interested in looking at a few of these, and also have a backup of the raw data, I will select the variables of interest and retain these in the new data files. To do this I initialize a the R object voi containing the names of the variables to keep.
+
+``` r
+# Cleaning tweets programmatically
+ref <- read.csv('twitter_data.csv', stringsAsFactors = FALSE) # .csv file containing path and altpath
+
+voi <- c('user_id', 'status_id', 'created_at',
+         'text', 'hashtags', 'location',
+         'retweet_count', 'favorite_count', 'followers_count') # Variables of interest
+```
+
+Much like when collecting the Tweets I now loop through twitter_data.csv, loading each file using the path column and selecting the variables of interest or voi. Then the text variable of each file, is being passed to my function clean_tweets() before saving the data.frame as a new .rds file using the column altpath in twitter_data.csv.
+
+``` r
+# Looping through ref reading in datasets containing tweets and cleaning text variable
+for (row in 1:nrow(ref)) {
+  df <- readRDS(ref$path[row]) %>% 
+    select(all_of(voi))
+  df$text <- clean_tweets(df$text)
+  saveRDS(df, ref$altpath[row])
+}
+```
+Having an individual file for each query is nice for backup purposes, however, for analysis purposes, loading 42 individual files and applying the same operations on each doesn't seem effective. Therefore, in this next section I will join the files together, to create two distinct data.frames during and after the first and final debate. 
+
+### Joining multiple Twitter queries
+
+In order to join the files together I need to load in the newly created clean .rds files. I do this by creating a list of data.frames and calling it df_list. I then use the function rbindlist, to bind the rows from the files pertaining to the first debate together, and remove duplicates using the function distinct on the variable status_id. The resulting data.frame is then saved as a new .rds file, and the same is done for the files pertaining to the final debate.
+
+``` r
+# Loading cleaned datasets as list of dataframes
+df_list <- lapply(ref$altpath, readRDS)
+ref_clean <- read.csv('twitter_data_clean.csv', stringsAsFactors = FALSE) # .csv file containing paths for cleaned data
+
+# Combining cleaned datasets into two dataframes with regard to collection date
+presdebate_first <- rbindlist(df_list[1:18]) %>% 
+  distinct(status_id, .keep_all = TRUE) %>% 
+  saveRDS(ref_clean$path[1])
+
+presdebate_final <- rbindlist(df_list[19:39]) %>% 
+  distinct(status_id, .keep_all = TRUE) %>% 
+  saveRDS(ref_clean$path[2])
+```
+
+This resulted in two RData .rds files containing a total of 325.314 unique tweets, which are now ready for analysis. If you are interested in checking out this project in more depth, the complete source code can be found on [GitHub](https://github.com/ADernild/pres_debate).
